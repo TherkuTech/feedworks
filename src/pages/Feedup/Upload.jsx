@@ -3,12 +3,14 @@
 
 import Papa from 'papaparse';
 import {useState} from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Upload = () => {
 
   const [data,setData] = useState([]);
   const [column,setColumn] = useState('');
+  const [feedback,setFeedback] = useState([])
   
   const handleUpload = ()=>{
     const file = document.querySelector('input').files[0];
@@ -22,14 +24,14 @@ const Upload = () => {
 
   const handleAnalyse=()=>{
     let index = data[0].indexOf(column);
-    console.log(index);
     let feedback = data.slice(1).map((row)=>row[index]);
-    console.log(feedback);
+    setFeedback(feedback)
+    toast.success('Succesfully')
   }
 
 
   return (
-    <div className='h-screen background-color'>
+    <div className='h-[90vh]'>
          <div className='flex items-center justify-center h-[70%] gap-x-[10rem]'>
               <div className='flex flex-col border-solid h-[30rem] w-[30rem] justify-center text-center items-center gap-y-[5rem]'>
                     <p className='text-5xl'>Upload Your Feedback File Here !</p>
@@ -80,7 +82,9 @@ const Upload = () => {
                 onChange={(e)=>setColumn(e.target.value)}
                 />
                 <button className='bg-black text-gray-200 p-[1rem] rounded-md hover:bg-gray-800' onClick={()=>handleAnalyse()}>Analyse you feedback</button>
+              
          </div>
+         <Toaster/>
     </div>
   )
 }

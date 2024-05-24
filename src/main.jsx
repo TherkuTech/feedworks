@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter,Navigate,RouterProvider } from 'react-router-dom'
-import App from './App.jsx'
 import './index.css'
 import { Provider } from 'react-redux'
 import Login from './pages/LoginCred/Login.jsx'
@@ -23,7 +22,11 @@ const router = createBrowserRouter([
       {
         path:'/home',
         element:<Home/>
-      } 
+      },
+      {
+        path:'/upload',
+        element:<Upload/>
+      }
     ]
   },
   {
@@ -34,10 +37,6 @@ const router = createBrowserRouter([
     path:'/signup',
     element:<Signup/>
   },
-  {
-    path:'/upload',
-    element:<Upload/>
-  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
