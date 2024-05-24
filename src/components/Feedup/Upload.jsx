@@ -4,14 +4,17 @@
 import Papa from 'papaparse';
 import {useState} from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { feedbacks_received , analysized_feedback } from '../../utils/redux/feedback_slice';
+import { useDispatch } from 'react-redux';
 
+import axios from 'axios';
 
-const Upload = () => {
-
+const Upload = (props) => {
+  const { setHomeNavi }  = props;
   const [data,setData] = useState([]);
   const [column,setColumn] = useState('');
-  const [feedback,setFeedback] = useState([])
-  
+  const dispatch = useDispatch();
+
   const handleUpload = ()=>{
     const file = document.querySelector('input').files[0];
     Papa.parse(file, {
@@ -21,22 +24,39 @@ const Upload = () => {
       }
     });
   }
+  
+  const handle_feedback_analysis = async (form_data) => {
+    try {
+      const response = await axios.post('http://localhost:5000/llm/categories', { data: form_data });
+      const data = response.data;
+      dispatch(analysized_feedback(data.data))
+      return true;
+    } catch (err) {
+      console.log(err)
+      return false;
+    }
+  }
 
-  const handleAnalyse=()=>{
+  const handleAnalyse= async ()=>{
     let index = data[0].indexOf(column);
     let feedback = data.slice(1).map((row)=>row[index]);
-    setFeedback(feedback)
-    toast.success('Succesfully')
+
+    if(! await handle_feedback_analysis(feedback)){
+      dispatch(feedbacks_received(feedback))
+      toast.error('Failed to analyse feedback , Retry');
+    }else{
+      setHomeNavi(2);
+    }
   }
 
 
   return (
-    <div className='h-[90vh]'>
+    <div className='h-[90vh] flex flex-col items-center justify-center gap-[16px]'>
          <div className='flex items-center justify-center h-[70%] gap-x-[10rem]'>
               <div className='flex flex-col border-solid h-[30rem] w-[30rem] justify-center text-center items-center gap-y-[5rem]'>
                     <p className='text-5xl'>Upload Your Feedback File Here !</p>
                     <input type='file' 
-                    accept='.csv' 
+                    accept='.csv,.xlsx' 
                     onChange={()=>handleUpload()}
                     className='text-gray-100 border border-gray-300  cursor-pointer bg-gray-900 p-[1rem] rounded-md'
                     />
@@ -89,4 +109,4 @@ const Upload = () => {
   )
 }
 
-export default Upload
+export default Upload;

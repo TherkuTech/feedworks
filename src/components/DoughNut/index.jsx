@@ -33,7 +33,7 @@ const DoughNuts = (props) => {
 
     return (
         <>
-            <div className="relative w-[18rem] h-[18rem] overflow-hidden flex justify-center items-center">
+            <div className="relative w-[30rem] h-[30rem] overflow-hidden flex justify-center items-center">
                 <Doughnut
                     className=''
                     data={{
