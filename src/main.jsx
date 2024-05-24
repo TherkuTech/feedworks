@@ -5,7 +5,7 @@ import App from './App.jsx'
 import './index.css'
 import Login from './pages/LoginCred/Login.jsx'
 import Signup from './pages/LoginCred/Signup.jsx'
-import Upload from './pages/LoginCred/Feedup/Upload.jsx'
+import Upload from './pages/Feedup/Upload.jsx'
 
 
 
