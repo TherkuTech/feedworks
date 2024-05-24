@@ -6,6 +6,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import Login from './pages/LoginCred/Login.jsx'
 import Signup from './pages/LoginCred/Signup.jsx'
+import Upload from './pages/Feedup/Upload.jsx'
 import Home from './pages/Home/index.jsx'
 import store from './utils/redux/store.js'
 import HomeLayout from './layout/HomeLayout/index.jsx'
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
     path:'/signup',
     element:<Signup/>
   },
+  {
+    path:'/upload',
+    element:<Upload/>
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
