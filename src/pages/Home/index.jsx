@@ -10,7 +10,6 @@ const Home = () =>{
 
     const form_data = ["The teaching style is engaging and effective.", "The class activities are not stimulating enough.", "The instructor is knowledgeable but lacks clarity in explanations.", "The course materials are outdated and need refreshing."] ;
 
-
     useEffect(()=>{
         handle_feedback_analysis(form_data);
     },[])
