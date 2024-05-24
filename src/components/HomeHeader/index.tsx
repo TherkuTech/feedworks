@@ -19,9 +19,9 @@ const HomeHeader = () => {
                         </div>
                         <div className="flex items-center">
                             <ul className="flex flex-row gap-x-[40px] items-center">
-                                <li><Link to={''}><RiHomeOfficeFill className="text-3xl"/></Link></li>
-                                <li><Link to={''}><FaUserAstronaut className="text-[1.5rem]"/></Link></li>
-                                <li><Link to={''}>< IoLogOut className="text-3xl"/></Link></li>
+                                <li><Link to={'/home'}><RiHomeOfficeFill className="text-3xl"/></Link></li>
+                                <li><Link to={'/profile'}><FaUserAstronaut className="text-[1.5rem]"/></Link></li>
+                                <li><Link to={'login'}>< IoLogOut className="text-3xl"/></Link></li>
                             </ul>
                         </div>
                     </div>
