@@ -5,6 +5,8 @@ import App from './App.jsx'
 import './index.css'
 import Login from './pages/LoginCred/Login.jsx'
 import Signup from './pages/LoginCred/Signup.jsx'
+import Upload from './pages/LoginCred/Feedup/Upload.jsx'
+
 
 
 const router = createBrowserRouter([
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
     path:'/signup',
     element:<Signup/>
   },
+  {
+    path:'/upload',
+    element:<Upload/>
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
