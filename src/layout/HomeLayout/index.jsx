@@ -6,8 +6,10 @@ const HomeLayout = () =>{
     return(
         <>
             <HomeHeader/>
-            <div className="bg-[#f7f7f7]">
-                <Outlet />
+            <div className="bg-[#f7f7f7] ">
+                <div className="w-[90%] mx-auto">
+                    <Outlet />
+                </div>
             </div>
         </> 
     )
