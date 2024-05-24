@@ -3,6 +3,7 @@ import DoughNuts from "../../components/DoughNut";
 import axios from "axios";
 import { analysized_feedback } from '../../utils/redux/feedback_slice'
 import { useDispatch, useSelector } from "react-redux";
+import Upload from "../Feedup/Upload";
 
 const Home = () =>{
     const dispatch = useDispatch();
@@ -50,6 +51,7 @@ const Home = () =>{
 
     return(
         <>
+            <Upload/>
             <div className="">
                 <DoughNuts labels={labels} category_count={category_count} />
                 <div className="flex flex-row gap-[16px] p-[16px]">
