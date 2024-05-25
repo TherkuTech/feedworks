@@ -48,7 +48,7 @@ const Signup = () => {
         <input value="Register" onClick={()=>(handleSignup())} type="submit" className="login-button" />
         <p className="text-white text-center">
           Have an account ?
-          <Link to='/login'><span className="text-blue-500 hover:text-blue-400"> Login</span></Link>
+          <Link to='/login'><span className="text-gray-400 hover:text-gray-300"> Login</span></Link>
         </p>
       </form>
     </div>

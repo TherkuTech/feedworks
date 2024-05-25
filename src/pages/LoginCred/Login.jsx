@@ -44,7 +44,7 @@ const Login = () => {
       <button onClick={()=>handleLogin()} className="login-button" >Sign In</button>
       <p className="text-white text-center">
           Don't have an account ?
-          <Link to='/signup'><span className="text-blue-500 hover:text-blue-400"> Register</span></Link>
+          <Link to='/signup'><span className="text-gray-400 hover:text-gray-300"> Register</span></Link>
         </p>
     </form>
   </div>
