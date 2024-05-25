@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import { Bar } from "react-chartjs-2";
 import { getRandomColorArray } from "../../utils/anaysis.helper";
 import { Chart as ChartJS } from 'chart.js/auto';

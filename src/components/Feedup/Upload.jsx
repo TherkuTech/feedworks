@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
 
 
@@ -6,8 +7,8 @@ import {useState} from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { feedbacks_received , analysized_feedback } from '../../utils/redux/feedback_slice';
 import { useDispatch } from 'react-redux';
-
 import axios from 'axios';
+
 
 const Upload = (props) => {
   const { setHomeNavi }  = props;
@@ -24,6 +25,7 @@ const Upload = (props) => {
       }
     });
   }
+
   
   const handle_feedback_analysis = async (form_data) => {
     try {
@@ -37,10 +39,10 @@ const Upload = (props) => {
     }
   }
 
+
   const handleAnalyse= async ()=>{
     let index = data[0].indexOf(column);
     let feedback = data.slice(1).map((row)=>row[index]);
-
     if(! await handle_feedback_analysis(feedback)){
       dispatch(feedbacks_received(feedback))
       toast.error('Failed to analyse feedback , Retry');
@@ -65,20 +67,21 @@ const Upload = (props) => {
               {
                data.length > 0 ?(
                 <>
-                         <div className='flex justify-between p-[1.6rem] bg-gray-800 rounded-md'>
+                         <div className='flex overflow-auto thin-scrollbar justify-between p-[1.6rem] bg-gray-800 rounded-md'>
                             {
                                     data[0].map((item,index)=>(
                                         <span className='text-gray-200 mr-[3rem]' key={index}>{item}</span>
                                     ))
                                 }
                          </div>
-                        <div className='flex flex-col thin-scrollbar overflow-y-auto h-[75%] gap-y-[0.8rem]  mt-[1rem]'>
+                        <div className='flex flex-col thin-scrollbar  overflow-auto h-[75%] gap-y-[0.8rem]  mt-[1rem]'>
                             {
                                 data.slice(1).map((row,index)=>(
                                     <div key={index} className='flex justify-between bg-gray-900  shadow-xl p-[1rem] rounded-md'>
                                         {
                                             row.map((item,index)=>(
-                                                <p className={`text-gray-200 ${index === 1 ? 'w-60' : 'w-40'} flex justify-start`} key={index}>{item}</p>
+                                                <p className={`text-gray-200 ${index === 1 ? 'w-60' : 'w-40'}  flex justify-start`} key={index}> {item.length > 25 ? `${item.substring(0, 20)}...` : item}</p>
+
                                             ))
                                         }
                                     </div>
