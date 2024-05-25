@@ -45,7 +45,7 @@ const Signup = () => {
           required=""
           onChange={(e)=>setPassword(e.target.value)}
         />
-        <input value="Register" onClick={()=>(handleSignup())} type="submit" className="login-button" />
+        <button onClick={()=>(handleSignup())} type="submit" className="login-button" >Register</button>
         <p className="text-white text-center">
           Have an account ?
           <Link to='/login'><span className="text-gray-400 hover:text-gray-300"> Login</span></Link>
