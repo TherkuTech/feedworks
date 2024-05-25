@@ -1,17 +1,44 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link ,useNavigate} from "react-router-dom";
+import { Toaster,toast } from "react-hot-toast";
 
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [data,setData] = useState([])
   const navigate = useNavigate();
 
-  const handleLogin = ()=>{
-    navigate('/home')
-  }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  
+    try {
+      if (!username || !password) {
+         toast.error('Please fill all the fields');
+         return
+      }
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}users/login`,{
+        username: username,
+        password: password
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if(response.status===200){
+      setData(response.data);
+      toast.success('Login Successful');
+      document.cookie = `token = ${response.data.token}`
+      navigate('/home')
+      }
+    } catch (err) {
+      toast.error('Login failed')
+      console.error(err);
+    }
+  };
   return (
     <>
   <div className="relative h-[100vh] flex flex-col items-center justify-center bg-black">
@@ -20,34 +47,32 @@ const Login = () => {
   </div>
   <div className="relative z-10 container shadow-sm shadow-white flex flex-col">
     <div className="heading">Sign In</div>
-    <form className="form" action="">
+    <div className="form" action="">
       <input
         placeholder="Username"
         id="username"
         type="text"
         className="input"
-        required=""
         onChange={((e)=>setUsername(e.target.value))}
       />
       <input
         placeholder="Password"
         id="password"
-        name="password"
         type="password"
         className="input"
-        required=""
         onChange={(e)=>setPassword(e.target.value)}
       />
       <span className="forgot-password">
         <a href="#">Forgot Password ?</a>
       </span>
-      <button onClick={()=>handleLogin()} className="login-button" >Sign In</button>
+      <button onClick={(e)=>handleLogin(e)} className="login-button" >Sign In</button>
       <p className="text-white text-center">
           Don't have an account ?
           <Link to='/signup'><span className="text-gray-400 hover:text-gray-300"> Register</span></Link>
         </p>
-    </form>
+    </div>
   </div>
+  <Toaster/>
   </div>
 
     </>

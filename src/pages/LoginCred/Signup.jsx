@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
+import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {Toaster,toast} from "react-hot-toast";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -8,9 +10,28 @@ const Signup = () => {
   const [email,setEmail] = useState("")
   const navigate = useNavigate();
 
-  const handleSignup =  ()=>{
-    navigate('/home')
+  const handleSignup = async()=>{
+    try{
+    console.log('in')
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}users/signup`, {
+      username, password, email
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(response.data)
+    if(response.status===201){
+      document.cookie = `token = ${response.data.token}`
+      toast.success('Successfully registered')
+      navigate('/home')
+    }
+  }catch(err){
+    console.log(err.message)
+    toast.error('Registration failed')
   }
+}
+
   return (
      <>
         <div className="relative h-[100vh] flex flex-col items-center justify-center bg-black">
@@ -19,13 +40,12 @@ const Signup = () => {
     </div>
     <div className="relative z-10 container shadow-sm shadow-white flex flex-col">
       <div className="heading">Register</div>
-      <form className="form" action="">
+      <div className="form">
         <input
           placeholder="Username"
           id="username"
           type="text"
           className="input"
-          required=""
           onChange={((e)=>setUsername(e.target.value))}
         />
           <input
@@ -33,8 +53,7 @@ const Signup = () => {
           id="email"
           type="email"
           className="input"
-          required=""
-          onChange={((e)=>setEmail(e.target.value))}
+            onChange={((e)=>setEmail(e.target.value))}
         />
         <input
           placeholder="Password"
@@ -42,7 +61,6 @@ const Signup = () => {
           name="password"
           type="password"
           className="input"
-          required=""
           onChange={(e)=>setPassword(e.target.value)}
         />
         <button onClick={()=>(handleSignup())} type="submit" className="login-button" >Register</button>
@@ -50,9 +68,10 @@ const Signup = () => {
           Have an account ?
           <Link to='/login'><span className="text-gray-400 hover:text-gray-300"> Login</span></Link>
         </p>
-      </form>
+      </div>
     </div>
     </div>
+     <Toaster/>
   
       </>
     )
