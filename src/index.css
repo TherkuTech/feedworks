@@ -14,8 +14,8 @@
     width: 4px;
   }
   .thin-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust color as needed */
-    border-radius: 10px;
+    background-color: gray;/* Adjust color as needed */
+    border-radius: 1px;
   }
   .thin-scrollbar::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.1); /* Adjust color as needed */
@@ -62,4 +62,100 @@ body {
   font-family: 'Satoshi-Bold', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 400px;
+  background-color: black;
+  border-radius: 40px;
+  padding: 25px 35px;
+  margin: 20px;
+}
+
+.heading {
+  text-align: center;
+  font-weight: 900;
+  font-size: 30px;
+  color: white
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.form .input {
+  width: 100%;
+  background: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+  box-shadow: rgba(186, 198, 203, 0.878) 0px 15px 10px -15px;
+  border-inline: 2px solid transparent;
+}
+
+.form .input::-moz-placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.form .input::placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.form .input:focus {
+  outline: none;
+}
+
+.form .forgot-password {
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.form .forgot-password a {
+  font-size: 11px;
+  color: white;
+  text-decoration: none;
+}
+
+.form .login-button {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+background-color: white;
+  color: black;
+  padding-block: 15px;
+  margin: 20px auto;
+  border-radius: 20px;
+  box-shadow: rgba(186, 198, 203, 0.878) 0px 15px 10px -15px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.form .login-button:hover {
+  transform: scale(1.03);
+  box-shadow: rgba(186, 198, 203, 0.878) 0px 18px 10px -15px;
+}
+
+.form .input:hover{
+  transform: scale(1.03);
+
+}
+
+.form .login-button:active {
+  transform: scale(0.95);
+  box-shadow: rgba(186, 198, 203, 0.878) 0px 15px 10px -15px;
+}
+
+
+.agreement {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.agreement a {
+  text-decoration: none;
+  color: #0099ff;
+  font-size: 9px;
 }

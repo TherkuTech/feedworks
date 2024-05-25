@@ -4,6 +4,7 @@ import { VscFeedback } from "react-icons/vsc";
 import { RiHomeOfficeFill } from "react-icons/ri";
 import { IoLogOut } from "react-icons/io5";
 import { FaUserAstronaut } from "react-icons/fa6";
+import { GiPapers } from "react-icons/gi";
 
 
 const HomeHeader = () => {
@@ -15,7 +16,7 @@ const HomeHeader = () => {
                     <div className="flex flex-row justify-between">
                         <div className="flex items-center gap-x-[0.5rem]">
                              <span className="text-2xl">Feedworks</span>
-                             <VscFeedback className="text-2xl"/>
+                             <GiPapers className="text-2xl"/>
                         </div>
                         <div className="flex items-center">
                             <ul className="flex flex-row gap-x-[40px] items-center">
