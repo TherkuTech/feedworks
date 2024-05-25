@@ -122,7 +122,7 @@ body {
   display: block;
   width: 100%;
   font-weight: bold;
-background-color: white;
+  background-color: rgb(226, 225, 225);
   color: black;
   padding-block: 15px;
   margin: 20px auto;
