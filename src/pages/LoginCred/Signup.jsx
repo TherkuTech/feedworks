@@ -13,7 +13,7 @@ const Signup = () => {
      <>
         <div className="relative h-[100vh] flex flex-col items-center justify-center bg-black">
     <div className="absolute bottom-10  flex items-center justify-center opacity-10 pointer-events-none">
-      <p className="text-[10rem]  text-white text-right">Your Feedbacks into insightable actions</p>
+      <p className="text-[10rem] hidden md:block text-white text-right p-[1rem]">Your Feedbacks into insightable actions</p>
     </div>
     <div className="relative z-10 container shadow-sm shadow-white flex flex-col">
       <div className="heading">Register</div>
@@ -43,7 +43,7 @@ const Signup = () => {
           required=""
           onChange={(e)=>setPassword(e.target.value)}
         />
-        <input value="Sign Up" onClick={()=>(handleSignup())} type="submit" className="login-button" />
+        <input value="Register" onClick={()=>(handleSignup())} type="submit" className="login-button" />
         <p className="text-white text-center">
           Have an account ?
           <Link to='/login'><span className="text-blue-500 hover:text-blue-400"> Login</span></Link>

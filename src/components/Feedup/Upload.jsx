@@ -26,7 +26,7 @@ const Upload = (props) => {
     });
   }
 
-  
+
   const handle_feedback_analysis = async (form_data) => {
     try {
       const response = await axios.post('http://localhost:5000/llm/categories', { data: form_data });
@@ -54,7 +54,7 @@ const Upload = (props) => {
 
   return (
     <div className='h-[90vh] flex flex-col items-center justify-center gap-[16px]'>
-         <div className='flex items-center justify-center h-[70%] gap-x-[10rem]'>
+         <div className='flex flex-col lg:flex-row items-center justify-center h-[70%] gap-x-[10rem]'>
               <div className='flex flex-col border-solid h-[30rem] w-[30rem] justify-center text-center items-center gap-y-[5rem]'>
                     <p className='text-5xl'>Upload Your Feedback File Here !</p>
                     <input type='file' 

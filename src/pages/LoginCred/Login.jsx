@@ -9,9 +9,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   return (
     <>
-      <div className="relative h-[100vh] flex flex-col items-center justify-center bg-black">
+  <div className="relative h-[100vh] flex flex-col items-center justify-center bg-black">
   <div className="absolute bottom-10  flex items-center justify-center opacity-10 pointer-events-none">
-    <p className="text-[10rem]  text-white text-right">Get your actionable insights done here</p>
+    <p className="hidden md:block text-[10rem] text-white text-right p-[1rem]">Get your actionable insights done here</p>
   </div>
   <div className="relative z-10 container shadow-sm shadow-white flex flex-col">
     <div className="heading">Sign In</div>
