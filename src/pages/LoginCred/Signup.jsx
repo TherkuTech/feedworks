@@ -1,13 +1,15 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email,setEmail] = useState("")
+  const navigate = useNavigate();
 
-  const handleSignup = async ()=>{
-
+  const handleSignup =  ()=>{
+    navigate('/home')
   }
   return (
      <>
