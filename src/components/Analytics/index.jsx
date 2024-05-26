@@ -71,7 +71,7 @@ const Analytics = (props) =>{
 
         </div>
        <div className="flex flex-col lg:flex-row gap-[30px] relative p-[20px] lg:h-[90vh]">
-            <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md  shadow-md shadow-gray-400"> 
+            <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md  "> 
                 <DoughNuts className='hover:shadow-md' labels={labels} category_count={category_count} />
                 <BarChartNuts className='bg-gray-900' labels={labels} datasets={category_count}/>
             </div>
@@ -114,7 +114,7 @@ const Analytics = (props) =>{
                                 return (
                                     <>
                                         <div className="flex text-black flex-row gap-[20px] shadow-md hover:shadow-xl p-[16px] rounded-xl">
-                                            <p>{data.feedback}</p>
+                                            <p>{data.action}</p>
                                         </div>
                                     </>
                                 )
