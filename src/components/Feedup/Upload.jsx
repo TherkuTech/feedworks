@@ -2,12 +2,13 @@
 /* eslint-disable react/jsx-key */
 
 
-import Papa from 'papaparse';
+import * as Papa from 'papaparse';
 import {useState} from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { feedbacks_received , analysized_feedback } from '../../utils/redux/feedback_slice';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import * as XLSX from 'xlsx';
 
 
 const Upload = (props) => {
@@ -16,15 +17,42 @@ const Upload = (props) => {
   const [column,setColumn] = useState('');
   const dispatch = useDispatch();
 
-  const handleUpload = ()=>{
+  const handleUpload = () => {
     const file = document.querySelector('input').files[0];
+    const fileName = file.name;
+    const fileExe = fileName.split('.').pop().toLowerCase();
+
+    if (fileExe === 'csv') {
+      parseCSV(file);
+    } else if (fileExe === 'xlsx' || fileExe === 'xls') {
+      parseXLSX(file);
+    } else {
+      alert('Unsupported file type');
+    }
+  };
+
+  const parseCSV = (file) => {
     Papa.parse(file, {
       complete: (results) => {
         console.log(results);
-        setData(results.data)
+        setData(results.data);
       }
     });
-  }
+  };
+
+  const parseXLSX = (file) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data,{type: 'array'});
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const feedData = XLSX.utils.sheet_to_json(worksheet,{header: 1});
+      console.log(feedData);
+      setData(feedData);
+    };
+    reader.readAsArrayBuffer(file);
+  };
 
 
   const handle_feedback_analysis = async (form_data) => {
