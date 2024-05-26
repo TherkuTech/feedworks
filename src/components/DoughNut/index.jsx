@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
@@ -13,9 +15,9 @@ const DoughNuts = (props) => {
 
     return (
         <>
-            <div className="relative w-[25rem] h-full overflow-hidden flex justify-center items-center">
+            <div className="w-[30rem] shadow-md hover:shadow-md rounded-md hover:shadow-gray-400  rounded-md h-full overflow-hidden flex justify-center items-center">
                 <Doughnut
-                    className=''
+                    className=' rounded-md p-[0.4rem] '
                     data={{
                         labels: labels,
                         datasets: [
