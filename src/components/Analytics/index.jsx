@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -30,6 +32,7 @@ const Analytics = (props) =>{
     const [category_count, setCategoryCount] = useState([])
     const [doughnut_data, setDoughnutData] = useState([])
     const [current_table_data , setTableData] = useState([])
+    const [selected,setSelected] = useState(0)
     // const [mappedData, setMappedData] = useState([])
     const [top_cate_key,setTopCateKey] = useState('')
     const categories_data = () => {
@@ -46,43 +49,53 @@ const Analytics = (props) =>{
         const data = Object.values(mappedData).map((value) => value.length);
         setLabels(labels)
         setCategoryCount(data)
+        if (labels.length > 0) {
+            setTopCateKey(labels[0]);
+            setTableData(mappedData[labels[0]]);
+            setSelected(0);
+        }
     }
 
     const handleChangeTableData = (key)=>{
         setTopCateKey(key)
         setTableData(categoried_data[key])
+        setSelected(1);
     }
 
 
     return(
        <>
-       <div className="flex flex-row gap-[30px] relative p-[16px] h-[90vh]">
-                
-            <button onClick={() => setHomeNavi(1)} className="z-10 absolute top-[5%] -left-[50px] hover:text-white hover:bg-black rounded-full duration-200 ease-in"><MdArrowBack className="text-3xl " /></button>
-            <div className="flex flex-col gap-[20px]"> 
-                <DoughNuts labels={labels} category_count={category_count} />
-                <BarChartNuts labels={labels} datasets={category_count}/>
+        <div className="p-[1rem] flex gap-x-[1rem]  rounded-t-md">
+        <button  onClick={() => setHomeNavi(1)} className=" hover:text-white  hover:bg-black text-black rounded-full duration-200 ease-in"><MdArrowBack className="text-3xl " /></button>
+         <p className="text-black text-3xl text-center ">Your Analytics</p>
+
+        </div>
+       <div className="flex flex-col lg:flex-row gap-[30px] relative p-[20px] lg:h-[90vh]">
+            <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md  shadow-md shadow-gray-400"> 
+                <DoughNuts className='hover:shadow-md' labels={labels} category_count={category_count} />
+                <BarChartNuts className='bg-gray-900' labels={labels} datasets={category_count}/>
             </div>
             <div className="flex-1">
-                <div className="flex flex-row gap-[20px] rounded-xl bg-zinc-600 p-[8px]">
+                <div className="flex flex-row gap-[20px] text-xl  bg-gray-200 rounded-xl shadow-md shadow-gray-400  p-[8px]">
                     {
+
                         labels.map((key,index)=>{
                             return(
                                 <>  
-                                    <button className={`${top_cate_key ===  key ? 'bg-white text-black' : 'text-white'} rounded-xl p-[16px]` } onClick={() => handleChangeTableData(key)} key={key}>{key}</button>
+                                    <button className={`${selected===1 && top_cate_key ===  key ? 'bg-black text-white' : 'text-black'} rounded-xl p-[16px]` } onClick={() => handleChangeTableData(key)} key={key}>{key}</button>
                                 </> 
                             )
                         })
                     }
                 </div>
-                <div className="p-[16px] rounded-xl bg-zinc-600 mt-[15px] shadow-sm h-[550px] overflow-y-auto">
+                <div className="p-[16px] rounded-xl  mt-[10px]  h-[40%] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
             
                     <div className="flex flex-col gap-[8px]">
                         {
                             current_table_data.map((data, index) => {
                                 return (
                                     <>
-                                        <div className="flex flex-row gap-[20px] p-[16px] rounded-xl bg-white text-black">
+                                        <div className="flex text-black flex-row gap-[20px] shadow-md hover:shadow-xl p-[16px] rounded-xl">
                                             <p>{data.feedback}</p>
                                         </div>
                                     </>
@@ -91,6 +104,25 @@ const Analytics = (props) =>{
                         }
                     </div>
             
+                </div>
+                <div className="mt-[1rem]">
+                    <p className=" rounded-xl shadow-md shadow-gray-400 p-[1rem] text-xl bg-gray-200"><span className=" ">Actionable Insights</span></p>
+                    <div className="p-[16px] rounded-xl  mt-[10px] h-[16.5rem] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
+                    <div className="flex flex-col gap-[8px]">
+                        {
+                            current_table_data.map((data, index) => {
+                                return (
+                                    <>
+                                        <div className="flex text-black flex-row gap-[20px] shadow-md hover:shadow-xl p-[16px] rounded-xl">
+                                            <p>{data.feedback}</p>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+            
+                </div>
                 </div>
             </div>
        </div>

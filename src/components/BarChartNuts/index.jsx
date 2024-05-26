@@ -9,7 +9,7 @@ const BarChartNuts = (props) =>{
     const colors = getRandomColorArray(labels.length);
     return(
         <>
-            <div className="relative w-[25rem] h-full overflow-hidden flex justify-center items-center">
+            <div className="relative shadow-md hover:shadow-md rounded-md hover:shadow-gray-400 p-[0.2rem] w-full h-full overflow-hidden flex justify-center items-center">
                 <Bar
                     data={{
                         labels:labels,
