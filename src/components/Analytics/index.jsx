@@ -88,7 +88,7 @@ const Analytics = (props) =>{
                         })
                     }
                 </div>
-                <div className="p-[16px] rounded-xl  mt-[10px]  h-[40%] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
+                <div className="p-[16px] rounded-xl  mt-[10px] h-[16.5rem] lg:h-[40%] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
             
                     <div className="flex flex-col gap-[8px]">
                         {
