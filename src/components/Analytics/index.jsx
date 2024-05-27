@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DoughNuts from "../DoughNut";
 import { MdArrowBack } from "react-icons/md";
 import BarChartNuts from "../BarChartNuts";
+import { unstable_HistoryRouter } from "react-router-dom";
 
 const Analytics = (props) =>{
     const { home_navi , setHomeNavi } = props;
@@ -33,6 +34,7 @@ const Analytics = (props) =>{
     const [doughnut_data, setDoughnutData] = useState([])
     const [current_table_data , setTableData] = useState([])
     const [selected,setSelected] = useState(0)
+    const [uniqueActions,setUniqueActions] = useState([]);
     // const [mappedData, setMappedData] = useState([])
     const [top_cate_key,setTopCateKey] = useState('')
     const categories_data = () => {
@@ -55,6 +57,12 @@ const Analytics = (props) =>{
             setSelected(0);
         }
     }
+    
+    useEffect(()=>{
+        let uniqueActions = [...new Set(current_table_data.map(data => data.action))];
+        setUniqueActions(uniqueActions)
+        console.log(uniqueActions)
+    },[current_table_data])
 
     const handleChangeTableData = (key)=>{
         setTopCateKey(key)
@@ -71,7 +79,7 @@ const Analytics = (props) =>{
 
         </div>
        <div className="flex flex-col lg:flex-row gap-[30px] relative p-[20px] lg:h-[90vh]">
-            <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md  shadow-md shadow-gray-400"> 
+            <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md  w-[40%]"> 
                 <DoughNuts className='hover:shadow-md' labels={labels} category_count={category_count} />
                 <BarChartNuts className='bg-gray-900' labels={labels} datasets={category_count}/>
             </div>
@@ -110,11 +118,12 @@ const Analytics = (props) =>{
                     <div className="p-[16px] rounded-xl  mt-[10px] h-[16.5rem] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
                     <div className="flex flex-col gap-[8px]">
                         {
-                            current_table_data.map((data, index) => {
+                            uniqueActions.map((data, index) => {
                                 return (
                                     <>
                                         <div className="flex text-black flex-row gap-[20px] shadow-md hover:shadow-xl p-[16px] rounded-xl">
-                                            <p>{data.feedback}</p>
+                                            <p>{`${data!=""?data:"No Actionable Insights"}`}</p>
+
                                         </div>
                                     </>
                                 )
