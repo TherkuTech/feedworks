@@ -91,11 +91,11 @@ const Upload = (props) => {
                     className='text-gray-100 border border-gray-300  cursor-pointer bg-gray-900 p-[1rem] rounded-md'
                     />
               </div>
-              <div className=' bg-black p-[1rem] rounded-md h-[30rem] w-[45rem] flex flex-col justify-center '>
+              <div className=' bg-black p-[1rem] rounded-md sm:h-[30rem] sm:w-[45rem] flex flex-col justify-center '>
               {
                data.length > 0 ?(
                 <>
-                         <div className='flex overflow-auto thin-scrollbar justify-between p-[1.6rem] bg-gray-800 rounded-md'>
+                         <div className='flex overflow-auto thin-scrollbar justify-between p-[1.6rem]  bg-gray-800 rounded-md'>
                             {
                                     data[0].map((item,index)=>(
                                         <span className='text-gray-200 mr-[3rem]' key={index}>{item}</span>

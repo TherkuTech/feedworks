@@ -15,7 +15,7 @@ const DoughNuts = (props) => {
 
     return (
         <>
-            <div className="w-full shadow-md hover:shadow-md  hover:shadow-gray-400   h-full overflow-hidden flex justify-center items-center">
+            <div className="w-full shadow-md hover:shadow-md bg-[#f7f7f7] rounded-md hover:shadow-gray-400   h-full overflow-hidden flex justify-center items-center">
                 <Doughnut
                     className=' rounded-md p-[0.4rem] '
                     data={{
