@@ -15,7 +15,7 @@ const HomeLayout = () =>{
                 return cookie.substring(name.length + 1);
             }
         }
-        return null;
+        return null;    
     }
     
     const token = getCookieValue('token')

@@ -13,7 +13,7 @@ const Home = () =>{
 
     return(
         <>
-            <div className="">
+            <div className="relative">
                 {
                     home_navi === 1 ?
                         <Upload setHomeNavi={setHomeNavi} /> : 

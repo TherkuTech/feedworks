@@ -32,7 +32,7 @@ const Analytics = (props) => {
     const [selected, setSelected] = useState(0);
     const [uniqueActions, setUniqueActions] = useState([]);
     const [uniqueFeedbacks, setUniqueFeedbacks] = useState([]);
-    // const [mappedData, setMappedData] = useState([]);
+    const [feedbackName,setFeedbackName] = useState('');
     const [top_cate_key, setTopCateKey] = useState("");
 
     function getCookieValue(name) {
@@ -86,10 +86,14 @@ const Analytics = (props) => {
     };
 
     const handleSaveFeedback = async () => {
+        if(feedbackName === ""){toast.error('Please enter feedback name !');return;}
         try {
             const uniqueFeedbacks = Array.from(new Set(feedback_analysis.map(JSON.stringify))).map(JSON.parse);
             const response = await axios.post(`${import.meta.env.VITE_BASE_URL}feeds/addFeeds`,
-            { feedbacks : uniqueFeedbacks },
+            { 
+                feedback_name:feedbackName,
+                feedbacks : uniqueFeedbacks,
+            },
             {
                 headers:{
                     'Authorization':`Bearer ${token}`,
@@ -103,14 +107,56 @@ const Analytics = (props) => {
         }
 
     };
+    const [isOpen, setIsOpen] = useState(false);
+
+    const closeModal = () => setIsOpen(false);
+    const openModal = () => setIsOpen(true);
 
     return (
         <>
-            <div className="p-[1rem] flex gap-x-[1rem] rounded-t-md">
+            {isOpen && (
+                <div className="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                    <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onClick={closeModal}></div>
+
+                        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
+                            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <div className="sm:flex sm:items-start">
+                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                        <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                            Save Feedback
+                                        </h3>
+                                        <div className="mt-2">
+                                            <div className="text-sm flex flex-row gap-[8px]">
+                                                <input className="bg-gray-200 p-[16px] rounded-[16px] w-[60%]" placeholder="Feedback Title"
+                                                onChange={(e)=>setFeedbackName(e.target.value)}></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={handleSaveFeedback}>
+                                    Save
+                                </button>
+                                <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={closeModal}>
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            <div className="p-[1rem] flex gap-x-[1rem] rounded-t-md justify-between items-center ">
                 <button onClick={() => setHomeNavi(1)} className="hover:text-white hover:bg-black text-black rounded-full duration-200 ease-in">
                     <MdArrowBack className="text-3xl" />
                 </button>
                 <p className="text-black text-3xl text-center">Your Analytics</p>
+                {/* <button onClick={handleSaveFeedback} className="mt-4 p-2 bg-blue-500 text-white rounded">Save Feedback</button> */}
+                <button onClick={openModal} className="mt-4 p-2 bg-blue-500 text-white rounded">Save Feedback</button>
+
             </div>
             <div className="flex flex-col lg:flex-row gap-[30px] relative p-[20px] lg:h-[90vh] ">
                 <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md w-full lg:w-[40%] shadow-md bg-gray-200">
@@ -156,7 +202,7 @@ const Analytics = (props) => {
                             </div>
                         </div>
                     </div>
-                    <button onClick={handleSaveFeedback} className="mt-4 p-2 bg-blue-500 text-white rounded">Save Feedback</button>
+                    
                 </div>
                 <Toaster/>
             </div>
