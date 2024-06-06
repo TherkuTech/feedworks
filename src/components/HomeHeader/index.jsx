@@ -7,7 +7,7 @@ import { GiPapers } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { TbLayoutDashboardFilled } from "react-icons/tb";
 
 const HomeHeader = () => {
     const [username,setUsername] = useState('')
@@ -58,10 +58,11 @@ const HomeHeader = () => {
                              <span className="text-2xl">Feedworks</span>
                              <GiPapers className="text-2xl"/>
                         </div>
-                        <div className="flex items-center ">
+                        <div className="flex items-center">
                             <ul className="flex flex-row gap-x-[35px] items-center">
-                                <li className="cursor-pointer"><Link to={'/home'}><RiHomeOfficeFill className="text-3xl"/></Link></li>
-                                <li className="cursor-pointer" onClick={()=>handleLogout()}><IoLogOut className="text-3xl"/></li>
+                                <li className="cursor-pointer" title="home"><Link to={'/home'}><RiHomeOfficeFill className="text-3xl"/></Link></li>
+                                <li className="cursor-pointer" title="dashboard"><Link to={'/dashboard'}><TbLayoutDashboardFilled className="text-3xl" /></Link></li>
+                                <li className="cursor-pointer" onClick={()=>handleLogout()}><IoLogOut className="text-3xl"/></li>       
                                 <li className="flex justify-center items-center cursor-pointer gap-x-[0.5rem] bg-black px-[0.8rem] py-[0.3rem] rounded-md"><FaUserAstronaut className="text-[1.5rem] text-white"/> <span className="text-xl text-white">{username}</span></li>
                             </ul>
                         </div>

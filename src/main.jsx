@@ -9,6 +9,10 @@ import Upload from './components/Feedup/Upload.jsx'
 import Home from './pages/Home/index.jsx'
 import store from './utils/redux/store.js'
 import HomeLayout from './layout/HomeLayout/index.jsx'
+import DashboardLayout from './layout/DashboardLayout/index.jsx'
+import UserFeedbacks from './pages/Dashboard/UserFeedbacks/index.jsx'
+import FeedAnalysis from './pages/FeedAnalysis/index.jsx'
+
 
 const router = createBrowserRouter([
   {
@@ -26,6 +30,24 @@ const router = createBrowserRouter([
       {
         path:'/upload',
         element:<Upload/>
+      },
+      {
+        path:'analysis/:feed_id',
+        element:<FeedAnalysis/>
+      },
+      {
+        path:'/dashboard',
+        element:<DashboardLayout/>,
+        children:[
+          {
+            path:'/dashboard',
+            element:<Navigate to={'/dashboard/feedbacks'}/>
+          },
+          {
+            path:'/dashboard/feedbacks',
+            element:<UserFeedbacks/>
+          },
+        ]
       }
     ]
   },
