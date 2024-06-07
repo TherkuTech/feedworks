@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Outlet } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { useNavigate , useLocation } from "react-router-dom"

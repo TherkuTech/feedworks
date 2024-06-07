@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/jsx-key */
+
+
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 
 
 
@@ -18,6 +21,7 @@ const UserFeedbacks = () => {
     }
 
     const token = getCookieValue('token')
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!token) {
@@ -28,8 +32,6 @@ const UserFeedbacks = () => {
     }, [])
 
     const [analysized_feedback , setAnalysizedFeedback] = useState([])
-
-    console.log(token)
 
     const fetchAnalyziedFeedback = async () =>{
         try{
@@ -50,7 +52,6 @@ const UserFeedbacks = () => {
             <div className="bg-white shadow-md">
                 {
                     analysized_feedback.length === 0 ? <h1>No feedbacks available</h1> :
-        
                     analysized_feedback.map((feedback) => {
                         return (
                             <div className=" bg-gray-200 p-[20px] m-[20px]">

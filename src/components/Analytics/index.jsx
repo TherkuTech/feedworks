@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
@@ -8,6 +9,8 @@ import { MdArrowBack } from "react-icons/md";
 import BarChartNuts from "../BarChartNuts";
 import { unstable_HistoryRouter } from "react-router-dom";
 import { Toaster,toast } from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import Chatbot from "../Chatbot";
 
 const Analytics = (props) => {
     const { home_navi, setHomeNavi } = props;
@@ -86,6 +89,7 @@ const Analytics = (props) => {
     };
 
     const handleSaveFeedback = async () => {
+        
         if(feedbackName === ""){toast.error('Please enter feedback name !');return;}
         try {
             const uniqueFeedbacks = Array.from(new Set(feedback_analysis.map(JSON.stringify))).map(JSON.parse);
@@ -101,6 +105,7 @@ const Analytics = (props) => {
                 }
             });
             toast.success('Saved Succesfully !')
+            closeModal();
         } catch (error) {
             toast.error('Please try again later !')
             console.error('Error saving feedback:', error);
@@ -113,7 +118,7 @@ const Analytics = (props) => {
     const openModal = () => setIsOpen(true);
 
     return (
-        <>
+        <div>
             {isOpen && (
                 <div className="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
                     <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -139,7 +144,7 @@ const Analytics = (props) => {
                             </div>
                             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                 <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={handleSaveFeedback}>
-                                    Save
+                                 Save
                                 </button>
                                 <button type="button" className="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={closeModal}>
                                     Close
@@ -154,9 +159,7 @@ const Analytics = (props) => {
                     <MdArrowBack className="text-3xl" />
                 </button>
                 <p className="text-black text-3xl text-center">Your Analytics</p>
-                {/* <button onClick={handleSaveFeedback} className="mt-4 p-2 bg-blue-500 text-white rounded">Save Feedback</button> */}
-                <button onClick={openModal} className="mt-4 p-2 bg-blue-500 text-white rounded">Save Feedback</button>
-
+                <button onClick={openModal} className="mt-4 p-2 bg-blue-500 text-white rounded">Save Feedback</button> 
             </div>
             <div className="flex flex-col lg:flex-row gap-[30px] relative p-[20px] lg:h-[90vh] ">
                 <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md w-full lg:w-[40%] shadow-md bg-gray-200">
@@ -194,9 +197,12 @@ const Analytics = (props) => {
                             <div className="flex flex-col gap-[8px]">
                                 {
                                     uniqueActions.map((action, index) => (
+
+                                            action!="" && (
                                         <div key={index} className="flex text-black flex-row gap-[20px] shadow-md hover:shadow-xl p-[16px] rounded-xl">
-                                            <p>{action !== "" ? action : "No Actionable Insights"}</p>
+                                            <p>{action}</p>
                                         </div>
+                                            )
                                     ))
                                 }
                             </div>
@@ -206,7 +212,8 @@ const Analytics = (props) => {
                 </div>
                 <Toaster/>
             </div>
-        </>
+            <Chatbot id='chat'/>
+        </div>
     );
 }
 

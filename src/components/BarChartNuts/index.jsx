@@ -15,7 +15,7 @@ const BarChartNuts = (props) =>{
     },[labels])
     return(
         <>
-            <div className="relative bg-[#f7f7f7] shadow-md hover:shadow-md rounded-md hover:shadow-gray-400 p-[0.2rem] w-full h-full overflow-hidden flex justify-center items-center">
+            <div className="relative bg-white shadow-md hover:shadow-md rounded-md hover:shadow-gray-400 p-[0.2rem] w-full h-full overflow-hidden flex justify-center items-center">
                 <Bar
                     data={{
                         labels:labels,
