@@ -78,11 +78,11 @@ const Chatbot = () => {
             </div>
           )}
         </div>
-        <div className={`${messages.length>0?'absolute bottom-0 left-0 right-0 flex gap-x-[1rem] p-[1rem] bg-slate-50':'absolute top-0 left-0 right-0 flex gap-x-[1rem] p-[1rem] bg-slate-50'}`}>
+        <div className={`${messages.length>0?'absolute bottom-0 left-0 right-0 flex gap-x-[1rem] p-[1rem] bg-slate-50':'absolute top-0 left-0 right-0 flex gap-x-[1rem]  bg-slate-50'}`}>
           <input
             type="text"
             placeholder="Enter your question here"
-            className="flex-grow text-gray-900 border border-gray-300 bg-gray-300 p-[1rem] rounded-md"
+            className="flex-grow text-gray-900 border border-gray-300 bg-gray-300 p-[1.2rem] rounded-md"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyPress={(e) => {
