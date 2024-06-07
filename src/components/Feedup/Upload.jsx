@@ -17,6 +17,7 @@ const Upload = (props) => {
   const [column,setColumn] = useState('');
   const dispatch = useDispatch();
 
+
   const handleUpload = () => {
     const file = document.querySelector('input').files[0];
     const fileName = file.name;
@@ -81,8 +82,8 @@ const Upload = (props) => {
 
 
   return (
-    <div className='h-[90vh] flex flex-col items-center justify-center gap-[16px]'>
-         <div className='flex flex-col lg:flex-row items-center justify-center h-[70%] gap-x-[10rem]'>
+    <div className='mt-[8rem] lg:mt-0 h-[90vh] flex flex-col items-center justify-center gap-[16px]'>
+         <div className='flex flex-col lg:flex-row items-center justify-center lg:h-[70%] gap-x-[10rem]'>
               <div className='flex flex-col border-solid h-[30rem] w-[30rem] justify-center text-center items-center gap-y-[5rem]'>
                     <p className='text-5xl'>Upload Your Feedback File Here !</p>
                     <input type='file' 
@@ -91,11 +92,11 @@ const Upload = (props) => {
                     className='text-gray-100 border border-gray-300  cursor-pointer bg-gray-900 p-[1rem] rounded-md'
                     />
               </div>
-              <div className=' bg-black p-[1rem] rounded-md sm:h-[30rem] sm:w-[45rem] flex flex-col justify-center '>
+              <div className=' bg-black p-[1rem] rounded-md h-[30rem] sm:w-[45rem] flex flex-col justify-center '>
               {
                data.length > 0 ?(
                 <>
-                         <div className='flex overflow-auto thin-scrollbar justify-between p-[1.6rem]  bg-gray-800 rounded-md'>
+                         <div className='flex overflow-auto thin-scrollbar  justify-between p-[1.6rem]  bg-gray-800 rounded-md'>
                             {
                                     data[0].map((item,index)=>(
                                         <span className='text-gray-200 mr-[3rem]' key={index}>{item}</span>
