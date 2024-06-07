@@ -212,7 +212,9 @@ const Analytics = (props) => {
                 </div>
                 <Toaster/>
             </div>
-            <Chatbot id='chat'/>
+            <div>
+                <Chatbot id='chat'/>
+            </div>
         </div>
     );
 }
