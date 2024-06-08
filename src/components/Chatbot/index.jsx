@@ -61,10 +61,10 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-[3rem]">
+    <div className="flex flex-col items-center justify-center p-[3rem] h-screen " id='chat-bot'>
       <p className="text-4xl">Ask your questions here?</p>
       <div className={`${messages.length > 0?'w-full rounded-md shadow-b-lg bg-slate-50 shadow-gray-400 h-[40rem] mt-[2rem] p-[1rem] relative':'w-full rounded-md shadow-b-lg bg-slate-50 shadow-gray-400 max-h-[40rem] mt-[2rem] p-[1rem] relative' }`}>
-        <div className="h-[89%] thin-scrollbar overflow-y-auto p-[1rem]">
+        <div className="min-h-[500px] thin-scrollbar overflow-y-auto p-[1rem]">
           {messages.map((message, index) => (
             <div key={index} className={`p-[1rem] ${message.sender === 'user' ? 'text-right' : 'text-left'}`}>
               <span className={`inline-block text-left max-w-[50%] p-[1rem] rounded-md ${message.sender === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}>
@@ -78,7 +78,7 @@ const Chatbot = () => {
             </div>
           )}
         </div>
-        <div className={`${messages.length>0?'absolute bottom-0 left-0 right-0 flex gap-x-[1rem] p-[1rem] bg-slate-50':'absolute top-0 left-0 right-0 flex gap-x-[1rem]  bg-slate-50'}`}>
+        <div className={`${messages.length>=0?'absolute bottom-0 left-0 right-0 flex gap-x-[1rem] p-[1rem] bg-slate-50':'absolute top-0 left-0 right-0 flex gap-x-[1rem]  bg-slate-50'}`}>
           <input
             type="text"
             placeholder="Enter your question here"
