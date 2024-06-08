@@ -6,6 +6,9 @@ import { getCookieValue } from "../../utils/cookie";
 import Analytics from "../../components/Analytics";
 import {  useDispatch, useSelector } from "react-redux";
 import { analysized_feedback } from "../../utils/redux/feedback_slice";
+import Chatbot from "../../components/Chatbot";
+import ChatBotScroll from "../../components/ChatBotScroll";
+
 
 const FeedAnalysis = () =>{
     const {feed_id} = useParams()
@@ -30,10 +33,19 @@ const FeedAnalysis = () =>{
         }
     }
 
+    const scrollToChatbot = () => {
+        const chatbotElement = document.getElementById('chat-bot');
+        if (chatbotElement) {
+            chatbotElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <>
             <div className="bg-white shadow-md">
-                <Analytics home_navi={2} setHomeNavi ={''}/>
+                <Analytics home_navi={2} setHomeNavi ={''} push_back_to="/dashboard"/>
+                <Chatbot />
+                <ChatBotScroll/>
             </div>
         </>
     )

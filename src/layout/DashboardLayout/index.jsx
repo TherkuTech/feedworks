@@ -58,9 +58,9 @@ const DashboardLayout = () =>{
             <div className="flex flex-row h-screen gap-[20px] py-[8px]">
                 <div className="w-[250px] bg-white shadow-md p-[20px]">
                    <div className="flex flex-col gap-y-[2rem] items-center justify-center">
-                   <div className='w-full h-[10rem] flex items-center flex-col duration-200 ease-in  border-l-2 border-l-gray-700 bg-gray-200 opacity-80 text-xl border-2 border-gray-700 p-[1rem] text-black rounded-md'>
+                   <div className='!border-2 !border-gray-500 w-full h-[10rem]  flex items-center flex-col duration-200 ease-in  bg-gray-600 text-white   text-xl  p-[1rem]  rounded-md'>
                        <div className="flex flex-col items-center justify-center  gap-y-[1rem]">
-                          <FaCircleUser className="text-5xl text-black"/>
+                          <FaCircleUser className="text-5xl text-white"/>
                           <span className="text-xl">{username.charAt(0).toUpperCase() + username.substring(1)}</span>
                        </div> 
                        <span className="text-[12px]">From : {date}</span>

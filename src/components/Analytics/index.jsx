@@ -9,13 +9,13 @@ import { MdArrowBack } from "react-icons/md";
 import BarChartNuts from "../BarChartNuts";
 import { unstable_HistoryRouter } from "react-router-dom";
 import { Toaster,toast } from "react-hot-toast";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import Chatbot from "../Chatbot";
 
 const Analytics = (props) => {
-    const { home_navi, setHomeNavi } = props;
+    const { home_navi, setHomeNavi , push_back_to } = props;
     const { feedback_analysis, received_feedbacks } = useSelector((store) => store.feedback_reducer);
-
+    const navigate = useNavigate();
     useEffect(() => {
         console.log("Feedback Analysis:", feedback_analysis);
     }, [feedback_analysis]);
@@ -155,13 +155,19 @@ const Analytics = (props) => {
                 </div>
             )}
             <div className="p-[1rem] flex gap-x-[1rem] rounded-t-md justify-between items-center ">
-                <button onClick={() => setHomeNavi(1)} className="hover:text-white hover:bg-black text-black rounded-full duration-200 ease-in">
+                <button onClick={() =>{
+                    if(push_back_to === "home"){
+                        setHomeNavi(1)
+                    }else{
+                        navigate(push_back_to)
+                    }
+                }} className="hover:text-white hover:bg-black text-black rounded-full duration-200 ease-in">
                     <MdArrowBack className="text-3xl" />
                 </button>
                 <p className="text-black text-3xl text-center">Your Analytics</p>
                 <button onClick={openModal} className="mt-4 p-2 bg-blue-500 text-white rounded">Save Feedback</button> 
             </div>
-            <div className="flex flex-col lg:flex-row gap-[30px] relative p-[20px] lg:h-[90vh] ">
+            <div className="flex flex-col lg:flex-row gap-[30px] relative p-[20px] lg:min-h-[90vh] ">
                 <div className="flex flex-col gap-[20px] items-center justify-center p-[1rem] rounded-md w-full lg:w-[40%] shadow-md bg-gray-200">
                     <DoughNuts className='hover:shadow-md ' labels={labels} category_count={category_count} />
                     <BarChartNuts className='bg-gray-900' labels={labels} datasets={category_count} />
@@ -180,7 +186,7 @@ const Analytics = (props) => {
                             ))
                         }
                     </div>
-                    <div className="p-[16px] rounded-xl mt-[10px] h-[16.5rem] lg:h-[40%] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
+                    <div className="p-[16px] rounded-xl mt-[10px] h-[16.5rem] lg:max-h-[40%] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
                         <div className="flex flex-col gap-[8px]">
                             {
                                 uniqueFeedbacks.map((data, index) => (
@@ -191,9 +197,9 @@ const Analytics = (props) => {
                             }
                         </div>
                     </div>
-                    <div className="mt-[1rem]">
+                    <div className="mt-[1rem] ">
                         <p className="rounded-xl shadow-md shadow-gray-400 p-[1rem] text-xl bg-gray-200"><span className="">Actionable Insights</span></p>
-                        <div className="p-[16px] rounded-xl mt-[10px] h-[16.3rem] shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
+                        <div className="p-[16px] rounded-xl mt-[10px] h-[16.5rem] lg:max-h-[40%]  shadow-md shadow-gray-400 thin-scrollbar overflow-y-auto">
                             <div className="flex flex-col gap-[8px]">
                                 {
                                     uniqueActions.map((action, index) => (
@@ -212,9 +218,7 @@ const Analytics = (props) => {
                 </div>
                 <Toaster/>
             </div>
-            <div>
-                <Chatbot/>
-            </div>
+           
         </div>
     );
 }
